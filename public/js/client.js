@@ -68,15 +68,10 @@ $(document).ready( function () {
     socketdata.chosen_color = chosen_color;
     socketdata.client_name = client_name;
 
-
-    socketdata = {chosen_color: chosen_color; client_name: client_name;}
-
-
     // send a socket to the server with the socketdata
     socket.emit('add_to_page', socketdata);
 
     // close choose_color container
-    document.getElementById('choose_color_container').style.display = 'none';
     document.getElementById('choose_color_container').classList.remove('choose_color_container_is_open');
   });
 

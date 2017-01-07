@@ -12,8 +12,6 @@ $(document).ready( function () {
   // set socket location
   var socket = io.connect([location.protocol, '//', location.host].join(''));
 
-
-
 // ### TASK BUTTONS TO SOCKETS ### //
 
   $('#task1_button').on('click', function () {
