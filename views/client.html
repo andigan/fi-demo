@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    {#  variables from app.js res.render   #}
+    {#  title: String                      #}
+
+    <title>{{ title }}</title>
+
+    {# css #}
+    <link rel="stylesheet" type="text/css" href="/css/client.css" />
+
+    {# jquery scripts #}
+    <script src="js/cdn_locals/jquery.js"></script>
+    <script src="js/cdn_locals/jquery-ui.min.js"></script>
+
+    {# touch supports (must follow jquery) #}
+    <script src="js/cdn_locals/jquery.ui.touch-punch.js"></script>
+
+    {# https://github.com/benmajor/jQuery-Touch-Events #}
+    <script type="text/javascript" src="js/cdn_locals/jquery.mobile-events.min.js"></script>
+
+    {# socket io #}
+    <script src="js/cdn_locals/socket.io-1.3.7.js"></script>
+
+    {# gyronorm #}
+    <script src="js/cdn_locals/gyronorm.complete.min.js"></script>
+
+
+    {# bookmark icon link #}
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  </head>
+
+  <body>
+    <div id='wrapper'>
+
+      {# This div and its form start out hidden. #}
+      {# It is changed to visible when a socket  #}
+      {# is recieved from the server.            #}
+      <div id='get_name_container'>
+        <form id = "name_form" action = "">
+          Your name: <input type="text" id="name_input"><br>
+          <br>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+
+      {# This div starts out hidden.          #}
+      {# It is changed to visible when submit #}
+      {# is clicked on the form above.        #}
+      <div id='choose_color_container'>
+        <div id='p1' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p2' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p3' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p4' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p5' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p6' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p7' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p8' class='pick_color_box'><span class='box_name'></span></div>
+        <div id='p9' class='pick_color_box'><span class='box_name'></span></div>
+      </div>
+    </div>
+
+    {# main script #}
+    <script src="js/client.js"></script>
+  </body>
+</html>

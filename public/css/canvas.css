@@ -1,0 +1,29 @@
+* {
+  border:0;
+  margin:0;
+  padding:0;
+}
+
+#wrapper {
+  background-color:black;
+  display:block;
+  left:0;
+  position:absolute;
+  top:0;
+}
+
+.floating_color_box {
+  box-sizing:border-box;
+  position:absolute;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body {
+  background-color: black;
+  overflow-x:hidden;
+  overflow-y:hidden;  /* fixed the scrolling problem */
+  position:fixed;
+}
