@@ -24,6 +24,6 @@
 body {
   background-color: black;
   overflow-x:hidden;
-  overflow-y:hidden;  /* fixed the scrolling problem */
+  overflow-y:hidden;
   position:fixed;
 }
