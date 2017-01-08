@@ -4,11 +4,6 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    {#  variables from app.js res.render   #}
-    {#  title: String                      #}
-
-    <title>{{ title }}</title>
-
     {# css #}
     <link rel="stylesheet" type="text/css" href="/css/remote.css" />
 
@@ -19,7 +14,7 @@
     {# touch supports (must follow jquery) #}
     <script src="js/cdn_locals/jquery.ui.touch-punch.js"></script>
 
-    {# https ://github.com/benmajor/jQuery-Touch-Events #}
+    {# jQuery-Touch-Events #}
     <script type="text/javascript" src="js/cdn_locals/jquery.mobile-events.min.js"></script>
 
     {# socket io #}
@@ -29,9 +24,9 @@
   <body>
     <div id='wrapper'>
       <div id='tasks_container'>
-        <div id='task1_button' class='button'> hello solar system open div to add box to page </div>
-        <div id='task2_button' class='button'> let it go maybe add ten at a time </div>
-        <div id='task3_button' class='button'> task3 info </div>
+        <div id='task1_button' class='button'> hello solar system </div>
+        <div id='task2_button' class='button'> drag it out </div>
+        <div id='task3_button' class='button'> twist and shout </div>
         <div id='task4_button' class='button'> reset </div>
       </div>
     </div>
