@@ -5,9 +5,13 @@ $(document).ready( function () {
   // maximum row/column values
   var max_rows_columns = 50;
 
+  // get window size
+  var mainwide = window.innerWidth,
+      mainhigh = window.innerHeight;
+
   // set wrapper size
-  document.getElementById('wrapper').style.width = window.innerWidth + 'px';
-  document.getElementById('wrapper').style.height = window.innerHeight + 'px';
+  document.getElementById('wrapper').style.width = mainwide + 'px';
+  document.getElementById('wrapper').style.height = mainhigh + 'px';
 
 // ### SOCKET.IO CLIENT SIDE ### //
 
@@ -32,6 +36,8 @@ $(document).ready( function () {
     socket.emit('remote_task4_reset');
   });
 
+
+
   // ### REASSIGN GRID BUTTON ### //
 
   var row_options = '';
@@ -47,6 +53,14 @@ $(document).ready( function () {
   document.getElementById('row_options').innerHTML = row_options;
   document.getElementById('column_options').innerHTML = column_options;
 
+  // get the current defaults from the server upon connection
+  socket.on('set_columns_and_rows', function (data) {
+
+    // set the value of the dropdown options
+    document.getElementById('row_options').value = data.wrapper_rows;
+    document.getElementById('column_options').value = data.wrapper_columns;
+  });
+
   // when the change_grid_form is submitted...
   $('#change_grid_form').submit(function () {
 
@@ -61,5 +75,20 @@ $(document).ready( function () {
 
     return false;
   });
+
+
+  // ### PAGE HELPERS ### //
+
+  // listen for resize and orientation changes and make adjustments
+  // TO ADD: change positions and sizes of all boxes
+  window.addEventListener('resize', function () {
+    mainwide = window.innerWidth;
+    mainhigh = window.innerHeight;
+
+    // set wrapper size
+    document.getElementById('wrapper').style.width = window.innerWidth + 'px',
+    document.getElementById('wrapper').style.height = window.innerHeight + 'px';
+  }, false); // bubbling phase
+
 
 }); // end of document.ready

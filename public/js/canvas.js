@@ -54,6 +54,12 @@ $(document).ready( function () {
     document.getElementById(data.image_id).style.webkitTransform = data.transform_string;
   });
 
+  // socket to reset the page
+  socket.on('reset_page', function () {
+    // could remove all the elements, close all the divs, and check all the variables, or...
+    window.location.reload(true);
+  });
+
   // when a client disconnects, remove the associated image_id
   socket.on('client_disconnect', function (data) {
     $('#' + data.disconnect_image_id).remove();

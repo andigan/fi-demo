@@ -91,6 +91,7 @@ $(document).ready( function () {
   var socket = io.connect([location.protocol, '//', location.host, location.pathname].join(''));
 
   // this socket is sent from the server when the client first connects
+  // or when the remote sends the 'change_grid' socket
   socket.on('set_columns_and_rows', function (data) {
     columns = data.wrapper_columns;
     rows = data.wrapper_rows;
@@ -136,6 +137,13 @@ $(document).ready( function () {
     // assign the client's image_id to the box_count so that it matches the canvas id
     image_id = data.box_number;
   });
+
+  // socket to reset the page
+  socket.on('reset_page', function () {
+    // could remove all the elements, close all the divs, and check all the variables, or...
+    window.location.reload(true);
+  });
+
 
 
 // ### DRAGGABLE METHOD FROM jquery.ui ### //

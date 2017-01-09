@@ -77,6 +77,7 @@ io.on('connection', function (socket) {
 
   socket.on('remote_task4_reset', function () {
     box_number = 0;
+    socket.broadcast.emit('reset_page');
   });
 
   socket.on('change_grid', function (data) {
