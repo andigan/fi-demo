@@ -18,6 +18,10 @@ var server = app.listen(port, function () {
 // ################################################################## //
 
 
+// initialize default columns and rows for client and canvas
+var rows = 12,
+    columns = 4;
+
 // # ROUTING FUNCTIONS # //
 
 app.get('/remote', function (req, res) {
@@ -55,6 +59,9 @@ var io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
   var image_id = '';
 
+  socket.emit('set_columns_and_rows', {wrapper_columns: columns, wrapper_rows: rows});
+
+
 // incoming remote control sockets
   socket.on('remote_task1_start', function () {
     socket.broadcast.emit('task1_start');
@@ -70,6 +77,12 @@ io.on('connection', function (socket) {
 
   socket.on('remote_task4_reset', function () {
     box_number = 0;
+  });
+
+  socket.on('change_grid', function (data) {
+    columns = data.wrapper_columns;
+    rows = data.wrapper_rows;
+    socket.broadcast.emit('set_columns_and_rows', data);
   });
 
 

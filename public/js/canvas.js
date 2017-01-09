@@ -25,6 +25,16 @@ $(document).ready( function () {
   // set socket location, e.g. io.connect('http://localhost:8000'); || io.connect('http://www.domain_name.com');
   socket = io.connect([location.protocol, '//', location.host].join(''));
 
+  // this socket is sent from the server when the client first connects
+  // or when the remote sends the 'change_grid' socket
+  socket.on('set_columns_and_rows', function (data) {
+    columns = data.wrapper_columns;
+    rows = data.wrapper_rows;
+
+    // set name_box size
+    name_box_width = (mainwide / columns),
+    name_box_height = (mainhigh / rows);
+  });
 
   socket.on('add_to_canvas', function (data) {
     create_colored_box_in_dom(data.client_name, data.chosen_color, data.box_number);
@@ -48,7 +58,6 @@ $(document).ready( function () {
   socket.on('client_disconnect', function (data) {
     $('#' + data.disconnect_image_id).remove();
   });
-
 
 
 // ### PAGE HELPERS ### //

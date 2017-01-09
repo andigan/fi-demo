@@ -3,7 +3,7 @@ $(document).ready( function () {
 
 // ### SET PAGE VARIABLES ### //
 
-  // set name box height divisions
+  // set default name box height divisions
   var rows = 12,
       columns = 4;
 
@@ -11,7 +11,7 @@ $(document).ready( function () {
   var mainwide = window.innerWidth,
       mainhigh = window.innerHeight;
 
-  // get name_box size
+  // set name_box size
   var name_box_width = (window.innerWidth / columns),
       name_box_height = (window.innerHeight / rows);
 
@@ -90,6 +90,17 @@ $(document).ready( function () {
   // set socket location : io.connect('http://localhost:8000'); || io.connect('http://www.domain_name.com');
   var socket = io.connect([location.protocol, '//', location.host, location.pathname].join(''));
 
+  // this socket is sent from the server when the client first connects
+  socket.on('set_columns_and_rows', function (data) {
+    columns = data.wrapper_columns;
+    rows = data.wrapper_rows;
+
+    // set name_box size
+    name_box_width = (mainwide / columns),
+    name_box_height = (mainhigh / rows);
+
+  });
+
   // when the socket name is received from the server...
   socket.on('task1_start', function () {
     // open the get_name_container
@@ -101,7 +112,6 @@ $(document).ready( function () {
     assigndrag('.floating_color_box');
   });
 
-
   socket.on('task3_start', function () {
     // activate listening for device orientation data
     if (window.DeviceOrientationEvent) {
@@ -110,7 +120,7 @@ $(document).ready( function () {
 
   });
 
-  // this function is used when the listener is activated above
+  // this function is used only when the listener is activated above
   function orientationHandler(e) {
     socketdata = {};
     socketdata.image_id = image_id;
@@ -118,8 +128,6 @@ $(document).ready( function () {
     socketdata.transform_string = 'perspective(500) rotateZ(' + e.alpha + 'deg) rotateX(' + (e.beta) + 'deg) rotateY(' + e.gamma + 'deg)';
     socket.emit('client_transforming', socketdata);
   }
-
-
 
 
   // create the box in the client, using the name, color, and box_number data

@@ -1,6 +1,6 @@
 var config = {};
 
 // set port
-config.port = 80;
+config.port = 8000;
 
 module.exports = config;
