@@ -31,9 +31,8 @@ $(document).ready( function () {
     columns = data.wrapper_columns;
     rows = data.wrapper_rows;
 
-    // set name_box size
-    name_box_width = (mainwide / columns),
-    name_box_height = (mainhigh / rows);
+    // reposition all boxes
+    reposition_all_boxes();
   });
 
   socket.on('add_to_canvas', function (data) {
@@ -90,5 +89,61 @@ $(document).ready( function () {
     // add box_element to wrapper
     images_element.appendChild(box_element);
   };
+
+  // reposition all boxes on the page
+  function reposition_all_boxes() {
+
+    // set name_box size
+    name_box_width = (mainwide / columns),
+    name_box_height = (mainhigh / rows);
+
+    // get the boxes
+    color_box_elements = document.getElementsByClassName('floating_color_box');
+
+    // loop through each box
+    var i = 0;
+    while (i < color_box_elements.length) {
+
+      // get the new count from the id
+      var count = color_box_elements[i].getAttribute('id');
+
+      // resize the box
+      color_box_elements[i].style.width = name_box_width + 'px';
+      color_box_elements[i].style.height = name_box_height + 'px';
+
+      // position the box in a grid
+      // the row is equal to the remainder of count / rows
+      color_box_elements[i].style.top = (count % rows) * name_box_height + 'px';
+      //  // the column is equal to the quotient, rounded down
+      color_box_elements[i].style.left = ( Math.floor(count / rows) * name_box_width) + 'px';
+
+      i++;
+    };
+  };
+
+  // listen for resize and orientation changes and make adjustments
+  // TO ADD: change positions and sizes of all boxes
+  window.addEventListener('resize', function () {
+    mainwide = window.innerWidth;
+    mainhigh = window.innerHeight;
+
+    // set wrapper size
+    document.getElementById('wrapper').style.width = window.innerWidth + 'px',
+    document.getElementById('wrapper').style.height = window.innerHeight + 'px';
+
+    reposition_all_boxes();
+
+  }, false); // bubbling phase
+
+
+
+
+
+  };
+
+
+
+
+
 
 }); // end of document.ready
