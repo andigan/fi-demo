@@ -130,6 +130,16 @@ $(document).ready( function () {
     socket.emit('client_transforming', socketdata);
   }
 
+  // this socket is sent from the server when the client first connects
+  // or when the remote sends the 'change_grid' socket
+  socket.on('set_columns_and_rows', function (data) {
+    columns = data.wrapper_columns;
+    rows = data.wrapper_rows;
+
+    // reposition all boxes
+    reposition_all_boxes();
+  });
+
 
   // create the box in the client, using the name, color, and box_number data
   socket.on('add_to_client', function (data) {
@@ -196,6 +206,39 @@ $(document).ready( function () {
     // add box_element to wrapper
     images_element.appendChild(box_element);
   };
+
+
+  // reposition all boxes on the page
+  function reposition_all_boxes() {
+
+    // set name_box size
+    name_box_width = (mainwide / columns),
+    name_box_height = (mainhigh / rows);
+
+    // get the boxes
+    color_box_elements = document.getElementsByClassName('floating_color_box');
+
+    // loop through each box
+    var i = 0;
+    while (i < color_box_elements.length) {
+
+      // get the new count from the id
+      var count = color_box_elements[i].getAttribute('id');
+
+      // resize the box
+      color_box_elements[i].style.width = name_box_width + 'px';
+      color_box_elements[i].style.height = name_box_height + 'px';
+
+      // position the box in a grid
+      // the row is equal to the remainder of count / rows
+      color_box_elements[i].style.top = (count % rows) * name_box_height + 'px';
+      //  // the column is equal to the quotient, rounded down
+      color_box_elements[i].style.left = ( Math.floor(count / rows) * name_box_width) + 'px';
+
+      i++;
+    };
+  };
+
 
 
   // prevent default behavior to prevent iphone dragging and bouncing

@@ -7,9 +7,20 @@
 
 #change_grid_container {
   color: white;
-  bottom: 0;
-  position: absolute;
+  margin: 2px;
+}
 
+#options_container {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin: 3px;
+}
+
+#seed_canvas_container {
+  color: white;
+  margin: 2px;
 }
 
 #tasks_container {
@@ -72,14 +83,20 @@
 	top:1px;
 }
 
+#seed_submit {
+  background: #ffccff;
+}
+
+#change_grid_submit {
+  background: yellow;
+}
+
 
 input[type=submit] {
-  background: #ffccff;
   border:0 none;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   cursor:pointer;
   height: 5vh;
-  padding:5px 15px;
   width: 20vw;
 }

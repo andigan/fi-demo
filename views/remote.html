@@ -30,12 +30,20 @@
         <div id='task4_button' class='button'> reset </div>
       </div>
 
-      <div id='change_grid_container'>
-        <form id = "change_grid_form" action = "">
-          <input type="submit" value="Change Grid">
-            Columns: <select id='column_options'></select>
-            Rows: <select id='row_options'></select>
-        </form>
+      <div id='options_container'>
+        <div id='change_grid_container'>
+          <form id = "change_grid_form" action = "">
+            <input id='change_grid_submit' type="submit" value="Change Grid">
+              Columns: <select id='column_options'></select>
+              Rows: <select id='row_options'></select>
+          </form>
+        </div>
+        <div id='seed_canvas_container'>
+          <form id = "seed_canvas_form" action = "">
+            <input id='seed_submit' type="submit" value="Seed Canvas">
+              Seed Count: <select id='seed_options'></select>
+          </form>
+        </div>
       </div>
 
     </div>

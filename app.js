@@ -86,6 +86,10 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('set_columns_and_rows', data);
   });
 
+  socket.on('seed_canvas', function (data) {
+    socket.broadcast.emit('seed_canvas', data);
+  });
+
 
 // incoming client sockets
   socket.on('add_to_page', function (data) {

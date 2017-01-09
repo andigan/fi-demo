@@ -20,6 +20,15 @@ $(document).ready( function () {
   document.getElementById('wrapper').style.height = mainhigh + 'px';
 
 
+
+  var seed_colors =
+  ['#2879ff', '#ffd700', '#007a73', '#ed005c', '#fbfbfb', '#d1eb34',
+   '#00ff12', '#f59a45', '#189f66', '#00a9cf', '#5421b3', '#961c53',
+   '#e6a8ff', '#a5ee8f', '#9a9a9a', '#c700ff', '#63ecc3', '#ff94c0',
+   '#ff7340', '#11f4dc', '#915f42', '#93bbc9', '#f2ff00', '#f5c0c0',
+   '#23bd20', '#ff0000', '#ff00cf', '#dd500b', '#ff6300', '#2405e4'];
+
+
 // ### SOCKET.IO CLIENT SIDE ### //
 
   // set socket location, e.g. io.connect('http://localhost:8000'); || io.connect('http://www.domain_name.com');
@@ -52,6 +61,14 @@ $(document).ready( function () {
     // orientation information
     document.getElementById(data.image_id).style.webkitTransform = data.transform_string;
   });
+
+  socket.on('seed_canvas', function (data) {
+    clear_all_boxes();
+    seed_some_boxes(data.seed_number);
+  });
+
+
+
 
   // socket to reset the page
   socket.on('reset_page', function () {
@@ -121,6 +138,20 @@ $(document).ready( function () {
     };
   };
 
+  function clear_all_boxes() {
+
+    $('.floating_color_box').remove();
+
+  };
+
+
+  // call this function to auto-generate boxes
+  function seed_some_boxes(num) {
+    for (var i = 0; i <= num; i++) {
+      create_colored_box_in_dom((i % seed_colors.length).toString() + seed_colors[i % seed_colors.length], seed_colors[i % seed_colors.length], i);
+    };
+  };
+
   // listen for resize and orientation changes and make adjustments
   // TO ADD: change positions and sizes of all boxes
   window.addEventListener('resize', function () {
@@ -134,16 +165,5 @@ $(document).ready( function () {
     reposition_all_boxes();
 
   }, false); // bubbling phase
-
-
-
-
-
-  };
-
-
-
-
-
 
 }); // end of document.ready

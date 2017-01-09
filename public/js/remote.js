@@ -2,8 +2,10 @@ $(document).ready( function () {
 
 // ### SET PAGE VARIABLES ### //
 
-  // maximum row/column values
+  // maximum row/column values and seed numbers
   var max_rows_columns = 50;
+  var max_seed_number = 100;
+  var seed_number_default = 40;
 
   // get window size
   var mainwide = window.innerWidth,
@@ -75,6 +77,36 @@ $(document).ready( function () {
 
     return false;
   });
+
+
+
+  // ### SEED CANVAS BUTTON ### //
+
+  var seed_number_options = '';
+
+  // prepare HTML string for remote html
+  for (i = 1; i <= max_seed_number; i++){
+    seed_number_options += '<option val=' + i + '>' + i + '</option>';
+  };
+
+  // add the HTML string to the form on the DOM
+  document.getElementById('seed_options').innerHTML = seed_number_options;
+  document.getElementById('seed_options').value = seed_number_default;
+
+  // when the change_grid_form is submitted...
+  $('#seed_canvas_form').submit(function () {
+
+    // prepare the socketdata object
+    this.socketdata = {};
+
+    this.socketdata.seed_number = document.getElementById('seed_options').value;
+
+    // send the socket to the server to relay to the canvas and client
+    socket.emit('seed_canvas', this.socketdata);
+
+    return false;
+  });
+
 
 
   // ### PAGE HELPERS ### //
