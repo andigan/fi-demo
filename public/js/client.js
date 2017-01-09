@@ -23,6 +23,41 @@ $(document).ready( function () {
   document.getElementById('wrapper').style.height = mainhigh + 'px';
 
 
+  // assign random colors to pick_color_box
+  var color_choices =
+    ['#2879ff', '#ffd700', '#007a73', '#ed005c', '#fbfbfb', '#d1eb34',
+     '#00ff12', '#f59a45', '#189f66', '#00a9cf', '#5421b3', '#961c53',
+     '#e6a8ff', '#a5ee8f', '#9a9a9a', '#c700ff', '#63ecc3', '#ff94c0',
+     '#ff7340', '#11f4dc', '#915f42', '#93bbc9', '#f2ff00', '#f5c0c0',
+     '#23bd20', '#ff0000', '#ff00cf', '#dd500b', '#ff6300', '#2405e4'];
+
+  // slice(0) will duplicate the array instead of mutating the original
+  var color_choices_copy = color_choices.slice(0);
+  // get the boxes
+  pick_color_boxes = document.getElementsByClassName('pick_color_box');
+
+  // loop through each box
+  var i = 0;
+  while (i < pick_color_boxes.length) {
+
+    // reset the color_choices_copy if the copy has been emptied
+    if (color_choices_copy.length < 1) {
+      color_choices_copy = color_choices.slice(0);
+    };
+
+    // choose a random index
+    var index = Math.floor(Math.random() * color_choices_copy.length);
+    // get the random color element
+    var random_color = color_choices_copy[index];
+    // remove the random color from the copied array
+    color_choices_copy.splice(index, 1);
+    // use the color to give a random color to the element
+    pick_color_boxes[i].style.backgroundColor = random_color;
+    i++;
+  };
+
+
+
 // ### SUBMIT BUTTON ### //
 
   // when the name form is submitted...
@@ -54,10 +89,8 @@ $(document).ready( function () {
   // when a pick_color_box is clicked...
   $('.pick_color_box').on('click', function () {
 
-    // get the id of the selected box
-    var chosen_id = this.getAttribute('id'),
-        // get the color of the selected box
-        chosen_color = $('#' + chosen_id).css('background-color'),
+    // get the color of the selected box
+    var chosen_color = this.style.backgroundColor,
         // get the name of the client
         client_name = this.textContent;
 

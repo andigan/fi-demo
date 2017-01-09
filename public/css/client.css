@@ -94,18 +94,10 @@
 
 .pick_color_box {
   align-items: center;
+  color: black;
   display: flex;
   flex-direction: column;
   height: 10vw;
-  justify-content: center;
-  width: 20vw;
-}
-
-.chosen_color_box {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 20vw;
   justify-content: center;
   width: 20vw;
 }
@@ -118,42 +110,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-#p1 {
-  background-color: blue;
-}
-#p2 {
-  background-color: indigo;
-
-}
-#p3 {
-  background-color: pink;
-
-}
-#p4 {
-  background-color: purple;
-
-}
-#p5 {
-  background-color: white;
-
-}
-#p6 {
-  background-color: orange;
-
-}
-#p7 {
-  background-color: green;
-
-}
-#p8 {
-  background-color: yellow;
-
-}
-#p9 {
-  background-color: red;
-
 }
 
 input[type=text] {
